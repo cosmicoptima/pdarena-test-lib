@@ -1,7 +1,11 @@
 from dataclasses import dataclass
 from enum import Enum
+from rich.console import Console
 from time import time
+from traceback import format_tb
 from typing import Callable, List, Union
+
+console = Console()
 
 # should_defect function
 Bot = Callable[['Bot', List[bool]], bool]
@@ -31,7 +35,7 @@ class Validator:
         self.n_matchups = n_matchups
         self.n_rounds = n_rounds
 
-    def validate(self, bot: Bot) -> ResultDetails:
+    def _validate(self, bot: Bot) -> ResultDetails:
         for testcase in self.testcases:
             for _ in range(self.n_matchups):
                 history = []
@@ -49,3 +53,16 @@ class Validator:
                         return ResultDetails(Result.TIMEOUT, None)
 
         return ResultDetails(Result.VALID, None)
+
+    def validate(self, bot: Bot) -> ResultDetails:
+        result = self._validate(bot)
+
+        if result.result == Result.VALID:
+            console.print(f"[green]VALID[/green]")
+        elif result.result == Result.TIMEOUT:
+            console.print(f"[red]INVALID due to timeout[/red]")
+        elif result.result == Result.EXCEPTION:
+            console.print(f"[red]INVALID due to exception:[/red]")
+            console.print("".join(format_tb(result.exception.__traceback__)))
+
+        return result

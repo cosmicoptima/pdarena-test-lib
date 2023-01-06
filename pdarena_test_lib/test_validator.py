@@ -6,7 +6,7 @@ validator = Validator(10, 10)
 
 def test_valid():
     def valid(opponent, history):
-        return False  # always cooperate
+        return False
 
     assert validator.validate(valid).result == Result.VALID
 
