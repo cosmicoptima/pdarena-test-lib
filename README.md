@@ -7,7 +7,7 @@ from pdarena_test_lib import Validator
 validator = Validator(10, 10)
 
 def should_defect(opponent, history):
-    # YOUR CODE GOES HERE
+    # YOUR BOT'S CODE GOES HERE
     pass
 
 validator.validate(should_defect)
