@@ -13,7 +13,7 @@ def should_defect(opponent, history):
 validator.validate(should_defect)
 ```
 
-This will print ... .
+This will print a message indicating whether your bot is valid. If your bot is valid, the message will contain its overall score against each testcase. If your bot is invalid, the message will contain the reason why.
 
 You can also define your own testcases:
 
