@@ -13,6 +13,8 @@ def should_defect(opponent, history):
 validator.validate(should_defect)
 ```
 
+This will print ... .
+
 You can also define your own testcases:
 
 ```python
@@ -23,4 +25,20 @@ testcases = [
 ]
 
 validator = Validator(10, 10, testcases)
+```
+
+# installation
+
+## ...with pip
+
+Run the following:
+
+`pip install git+https://github.com/cosmicoptima/pdarena-test-lib`
+
+## ...with poetry
+
+Add the following to `pyproject.toml` under `tool.poetry.dependencies`:
+
+```toml
+pdarena-test-lib = { git = "https://github.com/cosmicoptima/pdarena-test-lib" }
 ```
