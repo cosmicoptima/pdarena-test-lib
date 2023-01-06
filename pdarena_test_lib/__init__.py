@@ -42,8 +42,9 @@ class Validator:
 
     def _validate(self, bot: Bot) -> ResultDetails:
         scores = []
+        opponents = self.testcases + [bot]
 
-        for testcase in self.testcases:
+        for opponent in opponents:
             scores_by_round = []
 
             for _ in range(self.n_matchups):
@@ -52,7 +53,7 @@ class Validator:
                     start = time()
 
                     try:
-                        defected = bot(testcase, history)
+                        defected = bot(opponent, history)
                     except Exception as e:
                         return ResultDetails(Result.EXCEPTION, None, e)
 
@@ -62,7 +63,7 @@ class Validator:
 
                     history.append(defected)
 
-                    opponent_defected = testcase(bot, history)
+                    opponent_defected = opponent(bot, history)
                     table = {
                         (True, True): 5,
                         (True, False): 10,
